@@ -5,6 +5,6 @@ from warnings import warn
 if version_info < (3, 10):
     warn("Warning: Interpreter is instable at a version lesser than 3.10 of python.")
 
-__author__ = ( # Following another design I found
-    "Neo Zetterberg 20091103neo@gmail.com", # Why not
+__author__ = (
+    "Neo Zetterberg", 
 )
