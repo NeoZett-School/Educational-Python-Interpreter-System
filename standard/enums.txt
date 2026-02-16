@@ -1,0 +1,21 @@
+import, 'standard/others.txt', others;
+
+class, Enum; end, class;
+
+class, Item;
+    func, init, self, name, value;
+        set, self, name, str, name;
+        set, self, value, obj, value;
+        return, name, self;
+    end, func;
+end, class;
+
+func, auto, name;
+    init, Item, 'item', name, None;
+    return, name, item;
+end, func;
+
+func, is_enum, dest, obj;
+    call, others.is_subclass, 'is_enum', obj, Enum;
+    return, dest, is_enum;
+end, func;

@@ -1,0 +1,1 @@
+"""Made for quick and easy resolutions - and somewhere to start if you are making an interpreter that aren't reliant on more advanced features."""

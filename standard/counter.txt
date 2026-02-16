@@ -1,0 +1,87 @@
+class, Counter;
+    // The counter itself works to increment a value and to reset it;
+
+    func, init, self, init_value;
+        set, self, value, int, init_value;
+        set, self, init_value, int, init_value;
+    end, func;
+
+    func, increment, self;
+        math, self, value, self.value, plus, 1;
+    end, func;
+
+    func, reset, self;
+        set, self, value, int, self.init_value;
+    end, func;
+end, class;
+
+class, Iterator, Counter;
+    // The simplistic iterator only iterates to the given length;
+
+    func, init, self, length;
+        set, self, value, int, 0;
+        set, self, init_value, int, 0;
+        set, self, length, int, length;
+    end, func;
+
+    func, iterate, self, func;
+        call, self.reset;
+        while, self.value, lesser, self.length;
+            call, func, self.value;
+            call, self.increment;
+        end, while;
+    end, func;
+end, class;
+
+class, ListIterator, Iterator;
+    // The list iterator works over whole lists;
+
+    func, init, self, list;
+        set, self, value, int, 0;
+        set, self, init_value, int, 0;
+        set, self, list, obj, list;
+        call, list.len, length;
+        set, self, length, int, length;
+    end, func;
+
+    func, iterate, self, func;
+        call, self.reset;
+        call, list.len, length;
+        set, self, length, int, length;
+        while, self.value, lesser, self.length;
+            call, self.list.get, value, self.value;
+            call, func, self.value, value;
+            call, self.increment;
+        end, while;
+    end, func;
+end, class;
+
+func, create_list_iterator, dest, *list;
+    // Create a new list iterator directly from the list gathered from the arguments;
+
+    init, ListIterator, iterator, list.items;
+    return, dest, iterator;
+end, func;
+
+func, remove_enumerate, iterator, func;
+    // Remove the enumeration in the iteration;
+
+    func, enumerated, i, value;
+        call, func, value;
+    end, func;
+    call, iterator.iterate, enumerated;
+end, func;
+
+func, iterate_list, list, func;
+    // Iterate over the list without the enumeration;
+
+    init, ListIterator, iterator, list;
+    call, remove_enumerate, iterator, func;
+end, func;
+
+func, enumerate_list, list, func;
+    // Don't remove the enumeration;
+
+    init, ListIterator, iterator, list;
+    call, iterator.iterate, func;
+end, func;

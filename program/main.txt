@@ -1,0 +1,15 @@
+import, 'standard/.txt';
+
+call, iterables.create_empty_dict, 'people';
+call, people.set, 'First', 'Neo';
+call, people.set, 'Second', 'Casper';
+call, people.set, 'Third', 'Emil';
+
+call, strings.create_format, 'id_name_format', '{} is {}';
+
+func, say_name, id, name;
+    call, id_name_format, text, id, name;
+    print, text;
+end, func;
+
+call, people.iterate_items, say_name;

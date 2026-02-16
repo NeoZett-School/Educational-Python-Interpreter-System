@@ -1,0 +1,18 @@
+func, is_instance, dest, obj, class;
+    if, obj.__class__, is, class;
+        return, dest, true;
+    end, if;
+    return, dest, false;
+end, func;
+
+func, is_subclass, dest, cls, class;
+    pytovm, inheritance, cls.__inheritance__;
+    call, inheritance.contains, is_subclass, class;
+    return, dest, is_subclass;
+end, func;
+
+func, create_empty_list, dest;
+    set, new_list, list, None;
+    call, new_list.clear, _;
+    return, dest, new_list;
+end, func;

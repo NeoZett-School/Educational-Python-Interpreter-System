@@ -1,0 +1,40 @@
+pyimport, os, os;
+
+class, Path;
+    func, init, self, path;
+        set, self, path, str, path;
+    end, func;
+
+    func, join, self, dest, other;
+        call, os.path.join, new_path, self.path, other.path;
+        init, Path, path, new_path;
+        return, dest, path;
+    end, func;
+
+    func, abs, self, dest;
+        call, os.path.abs, path, self.path;
+        return, dest, path;
+    end, func;
+
+    func, exists, self, dest;
+        call, os.path.exists, exists, self.path;
+        return, dest, exists;
+    end, func;
+
+    func, isdir, self, dest;
+        call, os.path.isdir, isdir, self.path;
+        return, dest, isdir;
+    end, func;
+
+    func, isfile, self, dest;
+        call, os.path.isfile, isfile, self.path;
+        return, dest, isfile;
+    end, func;
+end, class;
+
+class, CodeFile, Path;
+    func, import, self, dest;
+        import, self.path, import_module;
+        return, dest, import_module;
+    end, func;
+end, class;

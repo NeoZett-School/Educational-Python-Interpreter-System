@@ -1,0 +1,210 @@
+import, 'standard/counter.txt', counter_lib;
+
+class, Iterable;
+    // Iterable works more as a simple type, 
+       but it certainly works in itself as well;
+
+    func, init, self, list;
+        init, counter_lib.ListIterator, iterator, list;
+        set, self, iterator, obj, iterator;
+    end, func;
+
+    func, iterate, self, func;
+        call, counter_lib.remove_enumerate, self.iterator, func;
+    end, func;
+
+    func, enumerate, self, func;
+        call, self.iterator.iterate, func;
+    end, func;
+end, class;
+
+class, Dict;
+    // The dictionary simply works as a way to union keys and values;
+
+    func, init, self, keys, values;
+        set, self, keys, obj, keys;
+        set, self, values, obj, values;
+    end, func;
+
+    func, copy, self, dest;
+        call, self.keys.copy, new_keys;
+        call, self.values.copy, new_values;
+        init, Dict, new_dict, new_keys, new_values;
+        return, dest, new_dict;
+    end, func;
+
+    func, get, self, dest, key;
+        call, self.keys.index, index, key;
+        call, self.values.get, value, index;
+        return, dest, value;
+    end, func;
+
+    func, set, self, key, value;
+        func, failure, e;
+            call, self.keys.append, _, key;
+            call, self.values.append, _, value;
+        end, func;
+
+        try, failure;
+            call, self.keys.index, index, key;
+            call, self.values.set, _, index, value;
+        end, try;
+    end, func;
+
+    func, set_default, self, dest, key, value;
+        func, failure, e;
+            call, self.keys.append, _, key;
+            call, self.values.append, _, value;
+            return, 'value', value;
+        end, func;
+
+        try, failure;
+            call, self.keys.index, index, key;
+            call, self.values.get, value, index;
+        end, try;
+
+        return, dest, value;
+    end, func;
+
+    func, iterate_keys, self, func;
+        call, counter_lib.iterate_list, self.keys, func;
+    end, func;
+
+    func, iterate_values, self, func;
+        call, counter_lib.iterate_list, self.values, func;
+    end, func;
+
+    func, iterate_items, self, func;
+        func, package, key;
+            call, self.get, value, key;
+            call, func, key, value;
+        end, func;
+        call, counter_lib.iterate_list, self.keys, package;
+    end, func;
+end, class;
+
+class, List, Iterable;
+    // An abstraction of the vm list object;
+
+    func, init, self, *list;
+        set, self, list, obj, list;
+        init, counter_lib.ListIterator, iterator, list;
+        set, self, iterator, obj, iterator;
+    end, func;
+
+    func, copy, self, dest;
+        call, self.list.copy, new_list;
+        init, List, new_list, *new_list;
+        return, dest, new_list;
+    end, func;
+
+    func, get, self, dest, *args;
+        call, self.list.get, value, *args;
+        return, dest, value; 
+    end, func;
+
+    func, set, self, *args;
+        call, self.list.set, _, *args;
+    end, func;
+
+    func, pop, self, dest, *args;
+        call, self.list.pop, value, *args;
+        return, dest, value; 
+    end, func;
+
+    func, append, self, *args;
+        call, self.list.append, *args;
+    end, func;
+
+    func, remove, self, *args;
+        call, self.list.remove, _, *args;
+    end, func;
+
+    func, clear, self;
+        call, self.list.clear, _;
+    end, func;
+
+    func, count, self, dest, *args;
+        call, self.list.count, result, *args;
+        return, dest, result;
+    end, func;
+
+    func, index, self, dest, *args;
+        call, self.list.index, result, *args;
+        return, dest, result;
+    end, func
+
+    func, insert, self, *args;
+        call, self.list.insert, _, *args;
+    end, func;
+
+    func, sort, self, *args;
+        call, self.list.sort, _, *args;
+    end, func;
+
+    func, contains, self, dest, *args;
+        call, self.list.contains, result, *args;
+        return, dest, result;
+    end, func;
+
+    func, len, self, dest, *args;
+        call, self.list.len, result, *args;
+        return, dest, result;
+    end, func;
+
+    func, iterate, self, func;
+        call, counter_lib.remove_enumerate, self.iterator, func;
+    end, func;
+
+    func, enumerate, self, func;
+        call, self.iterator.iterate, func;
+    end, func;
+end, class;
+
+class, Tuple, Iterable;
+    // An immutable list object;
+
+    func, init, self, *list;
+        set, self, list, obj, list;
+        init, counter_lib.ListIterator, iterator, list;
+        set, self, iterator, obj, iterator;
+    end, func;
+
+    func, copy, self, dest;
+        call, self.list.copy, new_list;
+        init, Tuple, new_tuple, *new_list;
+        return, dest, new_tuple;
+    end, func;
+
+    func, get, self, dest, *args;
+        call, self.list.get, value, *args;
+        return, dest, value;
+    end, func;
+
+    func, contains, self, dest, *args;
+        call, self.list.contains, result, *args;
+        return, dest, result;
+    end, func;
+
+    func, len, self, dest, *args;
+        call, self.list.len, result, *args;
+        return, dest, result;
+    end, func;
+
+    func, iterate, self, func;
+        call, counter_lib.remove_enumerate, self.iterator, func;
+    end, func;
+
+    func, enumerate, self, func;
+        call, self.iterator.iterate, func;
+    end, func;
+end, class;
+
+func, create_empty_dict, dest;
+    set, keys, list, None;
+    call, keys.clear, _;
+    set, values, list, None;
+    call, values.clear, _;
+    init, Dict, new_dict, keys, values;
+    return, dest, new_dict;
+end, func;

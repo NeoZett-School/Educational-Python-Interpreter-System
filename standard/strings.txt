@@ -1,0 +1,6 @@
+func, create_format, dest, string;
+    set, format_obj, str, string;
+    pytovm, format_vm, format_obj;
+    set, format_func, obj, format_vm.format;
+    return, dest, format_func;
+end, func;
