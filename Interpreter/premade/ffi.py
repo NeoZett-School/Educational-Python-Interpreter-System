@@ -156,7 +156,7 @@ def r_pyimport(interpreter: Interpreter, runtime: Runtime, args: ArgumentList) -
         if attr_name.startswith("__"):
             continue
         attr_value = getattr(module, attr_name)
-        set_memory(module_env, attr_name, py_to_vm(attr_value, module))
+        set_memory(module_env, attr_name, py_to_vm(attr_value, module_env))
     
     set_memory(runtime, name, module_env)
 
